@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet"  href="style_home.css" >
+	<link rel="stylesheet"  href="bootstrap/css/bootstrap.css">
+	<script type="text/javascript" src="jquery-3.5.1.js"></script>
+	<link rel="icon"  href="icon\game.png" type="image" sizes="16x16">
+	<title>Game store</title>
+</head>
+<body class="body">
+	<div class="popupBackground" id="popupBackground">
+		<div class="popup">
+			<div style="text-align: right;">
+				<button class="exit_popup_btn" onclick="close_popup_tags()">x</button>
+			</div>
+			<div>
+				<div class="tag_list_container" id="tag_list_container">
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  	<a class="navbar-brand" href="http://localhost/i/homework/workshop/" style="text-decoration: none;"><div class="Tab_header_logo">GAME STORE</div></a>
+	  	<div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      	<li class="nav-item active">
+		        	<a class="nav-link" href="http://localhost/i/homework/workshop/">Store<span class="sr-only">(current)</span></a>
+		      	</li>
+		     	 <li class="nav-item">
+        			<a class="nav-link disabled" href="#">Library</a>
+      			</li>
+		    </ul>
+		</div>
+		    <div class="position_button" id="current_username"> 	
+		    </div>
+	</nav>
+	<div>
+		<div class="Search_by_game_name_container">
+			<label for="gsearch" style="color: #e6e6e6;">Search Game :</label>
+			<input type="search" id="gsearch" name="gsearch" placeholder="Game's name">
+			<button class="btn btn-success" onclick="search_by_game_name()">Search</button>
+		</div>
+		<div class="dropdown">
+		  	<button class="dropbtn">Add Tags</button>
+			<div class="dropdown-content" id="dropdown_tags_content">
+			</div>
+		</div>
+		<div id="tags"></div>
+		<div>
+		  	<button class="pricebtn" id="lower100" name="price_selected"  onclick="activate_btn(lower100,_100to300,_300to500,_500to1000,upper1000,all_prices)"><100&#x0E3F</button>
+		  	<button class="pricebtn" id="_100to300" name="price_selected"	onclick="activate_btn(_100to300,lower100,_300to500,_500to1000,upper1000,all_prices)">100&#x0E3F &#10230 300&#x0E3F</button>
+		  	<button class="pricebtn" id="_300to500" name="price_selected"	onclick="activate_btn(_300to500,lower100,_100to300,_500to1000,upper1000,all_prices)">300&#x0E3F &#10230 500&#x0E3F</button>
+		  	<button class="pricebtn" id="_500to1000" name="price_selected" onclick="activate_btn(_500to1000,lower100,_100to300,_300to500,upper1000,all_prices)">500&#x0E3F &#10230 1000&#x0E3F</button>
+		  	<button class="pricebtn" id="upper1000" name="price_selected" onclick="activate_btn(upper1000,lower100,_100to300,_300to500,_500to1000,all_prices)">1000&#x0E3F<</button>
+		  	<button class="pricebtn activate" id="all_prices" name="price_selected" onclick="activate_btn(all_prices,lower100,_100to300,_300to500,_500to1000,upper1000)">All prices</button>
+		</div>
+		<div>
+		  	<button class="search_by_tags_and_prices" onclick="search_by_tags_and_price()">Search by tags & prices</button>
+		</div>
+	</div>
+	<div id="game_list">
+		<!--TEST GAME LIST TAGS-->
+		<!--<div class="game_container" onclick="window.location.href='game_site/game_site_gen.php?game_name=XCOM3'">
+			<img src="game_list\XCOM3\thumb_nail\XCOM2_thumbnaill.jpg"/>
+			<div class="game_detail_thumbnail"> 
+				<p class="game_name_header">test</p>
+				<div class="game_detail_container">
+					<div class="detail">Release date : 9/9/2019</div>
+					<div class="detail">Developer : test</div>
+              		<div class="detail">Publisher : test</div>
+              		<div class="small_tags_detail_container" >Tags      : 
+              			<div class="small_tags_detail">hello</div>
+              			<button class="show_all_tags_btn" onclick="show_popup_tags('5')" id="show_all_tags_btn" >+</button>
+              		</div>
+				</div>
+				<div class="price">
+					&#x0E3F 300
+				</div>\
+			</div>	
+		</div>-->
+	</div>
+</body>
+<script type = "text/javascript">
+
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+	const game_name_searched = urlParams.get('game_name_searched');
+	console.log(game_name_searched);
+	const tags_selected_id_url = urlParams.get('tags_selected_id');
+	const price_selected_id_url = urlParams.get('price_selected_id');
+	console.log(tags_selected_id_url);
+	console.log(price_selected_id_url);
+	////Start about cookies////
+	var name 		= "username" + "=";
+	var username 	= "";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for(var i = 0; i < ca.length; i++) 
+	{
+	 	var c = ca[i];
+	    while (c.charAt(0) == ' ') 
+	    {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) 
+	    {
+	      username=c.substring(name.length, c.length);
+	      console.log(username);
+	    }
+	}
+	////End about cookies////
+
+	////Start username change////
+	if (username=="") 
+	{
+		var template = '<button type="button" class="btn btn-primary" onclick="location.href=\'register.php\';">Register</button><button type="button" class="btn btn-outline-light" onclick="location.href=\'login.php\';">login</button>';
+		$("#current_username").append(template);
+	}
+	else
+	{
+		console.log(username);
+		var template = '<div class="dropdown_username">\
+							<button type="button" class="btn btn-outline-light" id="username">'+username+"&dtrif;"+'</button>\
+							<div class="dropdown-content_username">\
+								<button  onclick="delete_cookie()">Logout</button>\
+		  					</div>\
+						</div>';
+		$("#current_username").append(template);
+	}
+	////End username change////
+
+	////Start about tags////
+	$.post("get_tags.php",
+    {
+    })
+    .done(function(data)
+    {
+		try
+		{
+			var tags = JSON.parse(data);
+		}
+		catch
+		{
+			var tags = "";
+		}
+		
+		var formatted_tags=[];
+		for (var i = 0; i < tags.length; i++) 
+		{
+			formatted_tags[i]=tags[i].tag_name;
+		}
+		formatted_tags.sort();
+		var template_game_types = "";
+		for (var i = 0; i < tags.length; i++) 
+		{
+			template_game_types=template_game_types+"<button onclick='add_tags("+"\""+formatted_tags[i]+"\""+")'>"+formatted_tags[i]+"</button>";
+		}	
+		$("#dropdown_tags_content").append(template_game_types);	
+	});
+	////End about tags////
+
+	////Start game list////
+	$.post("get_game_lists_and_thumnail_images_and_tags.php",
+    {
+    	game_name_searched:game_name_searched,tags_selected:tags_selected_id_url,price_selected:price_selected_id_url
+    })
+    .done(function(data)
+    {
+	
+		try
+		{
+			var game_lists = JSON.parse(data);
+		}
+		catch
+		{
+			var game_lists = "";
+		}
+		console.log(game_lists);
+		if(!game_lists) 
+		{
+			var template_game_not_found = '<p class="game_not_found">GAME NOT FOUND!!</p>';
+			$("#game_list").append(template_game_not_found);
+		}
+		else
+		{
+			var lower_level_game_name 		= game_lists[0].game_names;
+			var all_game_name 				= [game_lists[0].game_names];
+			var all_image_name				= [game_lists[0].image_name];
+			var all_release_date 			= [game_lists[0].release_date];
+			var all_developers				= [game_lists[0].developers];
+			var all_publishers 				= [game_lists[0].publishers];
+			var all_price					= [game_lists[0].price];
+			var tags_game 					= [];
+			var tags_specific_game 			= [];
+			for (var i = 0; i < game_lists.length; i++) 
+			{
+				if (game_lists[i].game_names != lower_level_game_name) 
+				{
+					all_game_name.push(game_lists[i].game_names);
+					all_release_date.push(game_lists[i].release_date);
+					all_developers.push(game_lists[i].developers);
+					all_publishers.push(game_lists[i].publishers);
+					all_price.push(game_lists[i].price);
+					all_image_name.push(game_lists[i].image_name);
+				}
+				if (game_lists[i].game_names != lower_level_game_name) 
+				{
+					tags_specific_game.push(tags_game);
+					tags_game = [];
+				}
+					tags_game.push(game_lists[i].tag_name);
+					lower_level_game_name	 	= game_lists[i].game_names;
+				if (i == game_lists.length-1) 
+				{
+					tags_specific_game.push(tags_game);
+				}
+			}
+			console.log(tags_specific_game);
+			console.log(tags_specific_game.length);
+			var template_tags_specific_game=[];
+			var highest_number_of_tags_show = 5;
+			for (var i = 0; i < all_game_name.length; i++) 
+			{
+				template_tags_specific_game[i]="";
+				for (var j = 0; j < highest_number_of_tags_show; j++) 
+				{	
+					if (tags_specific_game[i][j] == null) 
+					{
+						break;
+					}
+					template_tags_specific_game[i] = template_tags_specific_game[i]+'<div class="small_tags_detail">'+tags_specific_game[i][j]+'</div>';
+				}
+					template_tags_specific_game[i] = template_tags_specific_game[i]+'<button class="show_all_tags_btn" onclick="show_popup_tags(\''+tags_specific_game[i]+'\')">+</button>';
+					//'+tags_specific_game[i]+'
+			}
+			for (var i = 0; i < all_game_name.length; i++) 
+			{
+				var template_game_list = '<div class="game_container" onclick=\"window.location.href=\'game_site/game_site_gen.php?game_name='+all_game_name[i]+'\'\">\
+			<img src="game_list\\'+all_game_name[i]+'\\thumb_nail\\'+all_image_name[i]+'"/>\
+			<div class="game_detail_thumbnail"> \
+				<p class="game_name_header">'+all_game_name[i]+'</p>\
+				<div class="game_detail_container">\
+					<div class="detail">Release date : '+all_release_date[i]+'</div>\
+					<div class="detail">Developer : '+all_developers[i]+'</div>\
+              		<div class="detail">Publisher : '+all_publishers[i]+'</div>\
+              		<div class="small_tags_detail_container" >Tags      : \
+              			'+template_tags_specific_game[i]+'\
+              		</div>\
+				</div>\
+				<div class="price">\
+					&#x0E3F '+all_price[i]+'\
+				</div>\
+			</div>	\
+		</div>';
+			$("#game_list").append(template_game_list);
+			}
+		}
+	});
+	////End game list////
+
+	function search_by_game_name()
+	{
+		var  game_name = document.getElementById("gsearch").value;
+		if (game_name == "") 
+		{
+			return;
+		}
+		window.location.href='index.html?game_name_searched='+game_name;
+	}
+	function add_tags(name)
+	{
+		try
+		{
+			var check_tags = document.getElementById(name).id;
+			if (check_tags==name) 
+			{
+				return ;
+			}	
+		}
+		catch
+		{}
+		var template_tags="<div class='tags_selected' name ='tags_selected' id='"+name+"'>"+name+" "+"<button class='self_destroy' onclick='remove_tags("+"\""+name+"\""+")'>x</button>"+"</div>";
+		$("#tags").append(template_tags);
+	}
+	function remove_tags(name)
+	{
+		var check_tags = document.getElementById(name);
+		check_tags.remove();
+	}
+	function activate_btn(ID_self,ID1,ID2,ID3,ID4,ID5)
+	{
+		ID_self.className = "pricebtn activate";
+		if (ID1.className.search("activate") != -1) 
+		{	
+			ID1.className = "pricebtn";
+		}
+		if (ID2.className.search("activate") != -1) 
+		{	
+			ID2.className = "pricebtn";
+		}
+		if (ID3.className.search("activate") != -1) 
+		{	
+			ID3.className = "pricebtn";
+		}
+		if (ID4.className.search("activate") != -1) 
+		{	
+			ID4.className = "pricebtn";
+		}
+		if (ID5.className.search("activate") != -1) 
+		{	
+			ID5.className = "pricebtn";
+		}
+	}
+	function search_by_tags_and_price()
+	{
+		var  tags_selected = document.getElementsByName("tags_selected");
+		var  price_selected = document.getElementsByName("price_selected");
+		var  tags_selected_id =[];
+		var  price_selected_id ;
+		if (tags_selected.length == 0) 
+		{
+			return;
+		}
+		/*console.log(tags_selected);	
+		console.log(tags_selected.length);	
+		console.log(tags_selected[0].id);*/
+		for (var i = 0; i < tags_selected.length; i++) 
+		{
+			tags_selected_id[i] = tags_selected[i].id;
+		}
+		for (var i = 0; i < price_selected.length; i++) 
+		{
+			if (price_selected[i].className == "pricebtn activate") 
+			{
+				price_selected_id = price_selected[i].id
+				/*console.log(price_selected[i].className);
+				console.log(price_selected[i].id);*/
+			}
+		}
+		window.location.href='index.html?tags_selected_id='+tags_selected_id+'&price_selected_id='+price_selected_id;	
+	}
+	function delete_cookie()
+	{
+		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/ ";
+		window.open("index.html", "_self");	
+	}
+	$(document).ready(function()
+	{
+		$(".show_all_tags_btn").click(function(event)
+		{
+	  		event.stopPropagation();
+		});
+	});
+	function show_popup_tags(tags)
+	{
+
+		var template_show_popup_tags = "";
+		var tags_to_array = tags.split(",");
+		console.log(tags_to_array);
+		console.log(tags_to_array.length);
+		for (var i = 0; i < tags_to_array.length; i++) 
+		{
+			template_show_popup_tags = template_show_popup_tags+'<div class="tag_list_column">'			+tags_to_array[i]+'</div>'
+		}
+		document.getElementById("popupBackground").style.visibility = 'visible';
+		$("#tag_list_container").append(template_show_popup_tags);
+	}
+	function close_popup_tags()
+	{
+		 $(".tag_list_column").remove();
+		document.getElementById("popupBackground").style.visibility = 'hidden';	
+	}
+</script>
+</html>

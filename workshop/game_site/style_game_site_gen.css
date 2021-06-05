@@ -1,0 +1,408 @@
+.body
+{
+	margin: 0px;
+	background-color: black;
+}
+
+
+/*header*/
+.Tab_header_logo
+{
+	color: #e6e6e6;
+	font-family: Georgia, serif;;
+	font-size: 30px;
+	line-height: 60px;
+	position: sticky; 
+	margin-left: 20px;
+	
+}
+.position_button
+{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	position: sticky;
+}
+.position_button > button
+{
+	margin: 10px;
+}
+.dropdown_username {
+  	display: inline-block;
+  	margin: 10px;
+
+}
+.dropdown-content_username {
+  	display: none;
+  	width: 90px;
+  	position: absolute;
+  	background-color: white;
+  	z-index: 1;
+}
+.dropdown_username:hover  .dropdown-content_username 
+{
+	display: flex; 
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.dropdown-content_username>button
+{
+	background-color: white;
+	width: 90px;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+  	color: black;
+  	padding: 12px 16px;
+  	text-decoration: none;
+}
+.dropdown-content_username>button:hover
+{
+  	background-color: #b3b3b3;
+  	
+}
+
+
+/*popup*/
+.popupBackground
+{
+	background-color: rgba(0,0,0,0.8);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 100;
+	visibility: hidden;
+	position: fixed;
+}
+.popup
+{
+	background-color: #272d30;
+	border-radius: 25px;
+	width: 500px;
+	height: 500px;
+	position: relative;
+	padding: 20px;
+	z-index: 101;
+	margin: auto;
+	margin-top : 60px;
+}
+.exit_popup_btn
+{
+	background-color: #272d30;
+	border: 1px solid #ffffff;
+	text-align: center;
+	color: #ffffff;
+	width: 30px;
+	height: 30px;
+}
+.exit_popup_btn:hover
+{
+	background-color: red;
+}
+.tag_list_container 
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 450px;
+}
+.tag_list_column 
+{
+  	background-color: #00002e;
+  	border-radius: 4px;
+  	margin-top: 12px;
+  	text-align: center;
+  	font-size: 16px;
+  	color: #ffffff;
+  	width: 225px;
+  	height: 30px;
+  	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+
+/*detail*/
+.game_site_container_detail
+{
+	display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+	margin-top: 30px;
+	margin-left: 118px;
+	margin-right: 118px;
+	padding: 20px;
+	width: 	1300px;
+	height: 600px;
+	background-color: #272d30;
+}
+.game_site_show_big_image
+{
+	width: 	800px;
+	height: 400px;
+	background-color: white;
+}
+.game_site_show_small_image_container
+{
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
+	width: 	820px;
+	height: 140px;
+}
+.game_site_show_small_image_slide_to_left_btn
+{
+	height: 140px;
+	margin-right: 5px;
+	text-align: center;
+	font-size: 30px;
+    text-decoration: none;
+    background-color: #3366ff;
+    border: none;
+  	color: white;
+}
+.game_site_show_small_image_slide_to_left_btn:hover
+{
+    opacity: 0.7;
+
+}
+.minor_images_container
+{
+	min-width: 	720px;
+}
+.game_site_show_small_image
+{
+	width: 	160px;
+	height: 140px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: white;
+}
+.game_site_show_small_image:hover
+{
+	cursor: pointer;
+}
+.game_site_show_small_image:active
+{
+	border-style: solid;
+  	border-width: 1px;
+  	border-color: white;
+}
+.game_site_show_small_image_hidden
+{
+	display: none;
+}
+.game_site_show_small_image_slide_to_right_btn
+{
+	height: 140px;
+	margin-left: 5 px;
+	font-size: 30px;
+	text-align: center;
+    text-decoration: none;
+    background-color: #3366ff;
+    border: none;
+  	color: white;
+}
+.game_site_show_small_image_slide_to_right_btn:hover
+{
+    opacity: 0.7;
+}
+.game_site_show_thumbnail_image
+{
+    width: 	400px;
+	height: 250px;
+}
+.game_site_show_game_detail
+{
+	margin-top: 20px;
+	background-color: #272d30;
+    width: 	400px;
+	height: 270px;
+}
+.small_tags_detail_container
+{
+	display: flex;
+    flex-wrap: wrap;
+	font-size: 15px;
+	width: 	400px;
+	color: white;
+}
+.small_tags_detail
+{
+	white-space: nowrap; 
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-align: center;
+	min-width: 	50px;
+	max-width: 	90px;
+	height: 25px;
+	padding-left: 5px;
+	padding-right: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+	background-color: #00002e;
+	border-radius: 3px;
+	font-size: 15px;
+	color: white;
+}
+.show_all_tags_btn
+{
+	width: 	25px;
+	height: 25px;
+	margin-top: 5px;
+	background-color: #00002e;
+	border: none;
+	text-align: center;
+	color: white;
+}
+.show_all_tags_btn:hover
+{
+	background-color: #000080;
+}
+
+
+/*price*/
+.add_cart_btn_container
+{
+	margin-top: 20px;
+	background-color: black;
+    width: 	1300px;
+	height: 60px;
+	margin-left: 118px;
+	margin-right: 118px;
+}
+.current_state_price
+{
+	text-align: center;
+	color: white;
+	height: 50px;
+	padding-top: 10px;
+    padding-right: 10px;
+	float: right;
+	font-size: 20px;
+}
+.add_cart_btn
+{
+	background-color:  #33cc33;
+	border-radius: 4px;
+	color: white;
+	border: none;
+	float: right;
+	width: 	150px;
+	font-size: 20px;
+	text-align: center;
+	height: 50px;
+}
+.add_cart_btn:hover
+{
+	opacity: 0.7;
+}
+
+
+.game_site_content_and_description_and_requirement_container
+{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	background-color: black;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	margin-left: 118px;
+	margin-right: 118px;
+	width: 	1300px;
+	height: 900px;
+}
+	.game_site_left_container
+	{
+		width: 	820px;
+		height: 900px;
+		z-index: 1;
+		background-color: black;
+	}
+		/*content*/
+		.game_site_headline
+		{
+			color: white;
+			font-size: 20px;
+		}
+		.game_site_content_container
+		{
+			width: 	820px;
+			max-height: 160px;
+			overflow: auto;
+			background-color:  black;
+		}
+		.game_site_content
+		{
+			display: grid;
+ 			grid-template-columns: auto auto ;
+ 			grid-template-rows: 30px 30px;
+			width: 	800px;
+			height: 30px;
+			margin-bottom: 2px;
+			padding-left: 6px;
+			padding-right: 6px;
+			background-color: #005c99;
+		}
+		.game_site_content:hover
+		{
+			cursor: pointer;
+			opacity: 0.7;
+		}
+		.dlc_name
+		{
+			white-space: nowrap; 
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: left;
+			color: white;
+			min-width: 594px;
+		}
+		.dlc_price
+		{
+			white-space: nowrap; 
+			overflow: hidden;
+			text-overflow: ellipsis;
+			text-align: right;
+			color: white;
+			min-width: 194px;
+		}
+		/*description*/
+		.game_site_description
+		{
+			max-width: 	820px;
+			min-width: 	820px;
+			min-height: 700px;
+			max-height: 700px;
+			margin: 0px;
+			border: none;
+			overflow: hidden ;
+		}
+	.game_site_right_container
+	{
+	    width: 	450px;
+		height: 900px;
+		background-color:  black;
+	}
+		/*minimum requirment*/
+		.game_site_right_minimum_requirment
+		{
+			background-color: #272d30;
+		    width: 430px;
+		    min-height:320px;
+		    padding: 10px;
+			margin-left: 20px;
+		}
+		/*recommended requirment*/
+		.game_site_right_recommended_requirment
+		{
+			background-color: #272d30;
+		    max-width: 430px;
+		    min-height:320px;
+		    padding: 10px;
+			margin-left: 20px;
+		}
