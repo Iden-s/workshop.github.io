@@ -15,76 +15,63 @@
 		<pre class="register_form_detail">Username      : <input type="text" id="username"></pre>
 		<pre class="register_form_detail">Password      : <input type="password" id="password" ></pre>
 		<p class="red_text" id="error"></p>
-		<input class="confirm_register_btn" type="button" id="confirm_register_btn" value="Confirm"></input>
+		<input class="confirm_register_btn" type="button" id="confirm_register_btn" value="Confirm" onclick="check()"></input>
 	</form>
 </body>
 <script type = "text/javascript">
-	$( document ).ready(function() 
-    {
-		$.get("check_usernames_and_passwords.php", function(data, status)
-		{
+	function check()
+	{
+		var username 	=	document.getElementById('username').value;
+		var password  	=	document.getElementById('password').value;
+        $.post("check_usernames_and_passwords.php",
+    	{
+    		username:username , password:password
+    	})
+    	.done(function(data)
+    	{
 			try
 			{
 				var data_from_users = JSON.parse(data);
+
 			}
 			catch
 			{
 				var data_from_users = "";
 			}
-			console.log(data_from_users);
-			console.log(data_from_users[0].passwords);
-			document.getElementById('confirm_register_btn').onclick=function() 
-			{
-				var check_username		=check_usernames();
-				var check_password 	=check_passwords();
+			console.log(data_from_users.length);
+				var check_username ;
+				if (data_from_users.length != 0) 
+				{
+					check_username = true;
+					check_password = true;
+					console.log("true");
+				}
+				else
+				{
+					check_username = false;
+					check_password = false;
+					console.log("false");
+				}
 				var username 	= document.getElementById('username').value;
 
 				var d = new Date();
 				d.setTime(d.getTime() + (1*24*60*60*1000));
 				var expires = "expires=" + d.toUTCString();
-		    	if (check_username&&check_password) 
-		    	{
-		    		document.cookie = "username="+username+";"+expires+";"+"path=/";
-		        	window.open("index.html", "_self");	
+	    		if (check_username&&check_password) 
+	    		{
+	    			document.cookie = "username="+username+";"+expires+";"+"path=/";
+	        		window.open("index.html", "_self");	
 					alert("Your login was success");
-		    	}
-		    	else
-		    	{
-		    		document.getElementById('error').innerHTML="Username or Password not right!!";
-		        	return;
-		    	}
-		    	 
-		    	
-			}
-			function check_usernames()
-			{
-		        var username 	= document.getElementById('username').value;
-		  
-		   		for (var i = 0; i < data_from_users.length; i++) 
-				{
-					if (data_from_users[i].usernames==username) 
-					{
-						return true;
-					}
-				}
-				return false;
-
-			}
-			function check_passwords()
-			{
-		        var password 	= document.getElementById('password').value;
-		  
-		   		for (var i = 0; i < data_from_users.length; i++) 
-				{
-					if (data_from_users[i].passwords==password) 
-					{
-						return true;
-					}
-				}
-				return false;
-
-			}
-		});
+	    		}
+		    		else
+	    		{
+	    			document.getElementById('error').innerHTML="Username or Password not right!!";
+	        		return;
+	    		}
+			
 	});
+
+	}
+
 </script>
 </html>

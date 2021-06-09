@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2021 at 01:43 AM
+-- Generation Time: Jun 05, 2021 at 08:52 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -462,7 +463,7 @@ INSERT INTO `thumnail_images` (`id_thumbnail_images`, `image_name`, `id_games`) 
 CREATE TABLE `users` (
   `id_users` int(11) NOT NULL,
   `usernames` varchar(20) COLLATE utf8_bin NOT NULL,
-  `passwords` text COLLATE utf8_bin NOT NULL
+  `passwords` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
@@ -470,8 +471,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_users`, `usernames`, `passwords`) VALUES
-(5, 'I', 'f6be1384a828414721db0750ec20216c'),
-(6, 's', '81dc9bdb52d04dc20036dbd8313ed055');
+(1, 'Iden', 'sittasitta683'),
+(2, 'I', 'sittasitta683'),
+(3, 'Iden97', '12345'),
+(4, 'aaa', 'aaa');
 
 -- --------------------------------------------------------
 
@@ -493,8 +496,10 @@ CREATE TABLE `users_detail` (
 --
 
 INSERT INTO `users_detail` (`id_users`, `email`, `birthdate`, `sex`, `country`, `insert_time`) VALUES
-(5, 'sitta.s@outlook.co.th', '2020-01-01', 'male', 'Thailand', '2021-06-09 21:03:23'),
-(6, 'aaaaa@hotmail.com', '2019-02-10', 'male', 'Afghanistan', '2021-06-09 21:33:10');
+(1, 'sitta.s@outlook.co.th', '2020-01-15', 'male', 'Thailand', '2021-01-15 03:54:22'),
+(2, 'i@gmail.com', '2020-01-15', 'male', 'Thailand', '2021-01-15 03:58:50'),
+(3, 'money_683@hotmail.com', '2020-02-16', 'female', 'Thailand', '2021-01-15 04:01:30'),
+(4, 'aaaaa@hotmail.com', '2018-07-24', 'male', 'Thailand', '2021-05-24 07:33:18');
 
 --
 -- Indexes for dumped tables
@@ -593,13 +598,13 @@ ALTER TABLE `thumnail_images`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users_detail`
 --
 ALTER TABLE `users_detail`
-  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_users` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -610,6 +615,7 @@ ALTER TABLE `users_detail`
 --
 ALTER TABLE `thumnail_images`
   ADD CONSTRAINT `thumnail_images_ibfk_1` FOREIGN KEY (`id_games`) REFERENCES `game_lists` (`id_games`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

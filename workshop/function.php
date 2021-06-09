@@ -88,10 +88,10 @@
 
 		$conn->close();
 	}
-	function GetColumn_usernames_and_passwords()
+	function GetColumn_usernames_and_passwords($username,$password)
 	{
 		$conn = createMysqlConnection();		
-		$sql = "SELECT users.usernames,users.passwords FROM users";
+		$sql = "SELECT users.usernames,users.passwords FROM users WHERE usernames = '$username' AND passwords = '$password' ";
 		$result = $conn->query($sql);
 	    $all_data=array();
 		if ($result->num_rows > 0) 

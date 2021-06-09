@@ -10,6 +10,7 @@
 	$username 		 	= $user['username'];
 	$password  			= $user['password'];
 
+	$password_encoded=md5($password);
 	Send_data_users_detail($email,$birthdate,$sex,$country);
-	Send_data_users($username,$password);
+	Send_data_users($username,$password_encoded);
 ?>
